@@ -1,0 +1,28 @@
+<!-- templates/post_detail.html -->
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% load static %}
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}?{% now 'U' %}" /> {% endcomment %}
+<style>
+  a {
+    color: red;
+    //text-decoration:none;
+    font-size: 20px;
+  }
+  .postage{
+    margin-left : 200px;
+    padding: 50px
+    {% comment %} border : 2px solid black {% endcomment %}
+  }
+</style>
+<div class="postage">
+  <a href="{% url 'home'%}">Return to see all Posts</a>
+  {% block content %}
+  <div class="post">
+    <h2>{{ post.title }}</h2>
+    <img src="{{ post.cover.url}}" height="250px" />
+   <p> <a href="{% url 'post_edit' post.pk %}">+ Edit Blog Post</a></p>
+    <p><a href="{% url 'post_delete' post.pk %}">+ Delete Blog Post</a></p>
+  </div>
+  
+  {% endblock content %}
+</div>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+<html>
+
+<head>
+  {% comment %}
+  <link rel="stylesheet" href="{% static 'base.css'? %}" /> {% endcomment %}
+  <style>
+    a {
+      text-align: center;
+      /* align-items: center; */
+    }
+
+    .create {
+      color: green;
+      font-size: 30px;
+    }
+
+    .new1 {
+      position: absolute;
+      right: 120px;
+    }
+
+    .c {
+      background-color: rgb(25, 135, 139) !important;
+    }
+  </style>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+
+</head>
+
+<body>
+  {% block content %}
+  <div class="row mt-5 ">
+    {% for post in object_list %}
+    <div class="col-4">
+
+      <div class="card mb-5" style="width: 18rem; ">
+
+        <img src="{{post.cover.url}}" height="180px" />
+        <div class="card-body ">
+          <span class="font-weight-bold"><b> {{post.title}}</b>
+           </span>
+          <span class="text-muted">by {{ post.author }} 
+           </span>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+           
+
+         {% if user.is_authenticated and user == post.author %}
+         <a class="btn btn-success " href="{% url 'post_detail' post.pk %}">Edit</a>
+
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+  {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+
+  </script>
+</body>
+
+</html>
